@@ -19,7 +19,8 @@
 <ion-content class="card-background-page">
 
   <div *ngIf="dishes">
-	  <ion-card *ngFor="let dish of dishes" (click)="dishSelected(dish)">
+	  <ion-card *ngFor="let dish of dishes" (click)="dishSelected(dish)"
+	  (pan)="addToFavourites(dish)">
 	    <img src="{{BaseURL + dish.image}}"/>
 	    <ion-card-content>
 		    <ion-card-title>{{dish.name}}</ion-card-title>

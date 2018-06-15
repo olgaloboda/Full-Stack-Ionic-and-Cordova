@@ -15,7 +15,7 @@
 
 <ion-content>
 	<ion-card *ngIf="dish">
-		<ion-card (click)="dishSelected($event, dish)">
+		<ion-card>
 		    <img src="{{BaseURL + dish.image}}"/>
 		    <ion-card-content>
 			    <ion-card-title>{{ dish.name }}</ion-card-title>
@@ -53,4 +53,16 @@
   			</p>
   		</ion-item>
   	</ion-list>
+
+  	<ion-fab bottom right [hidden]="favourite">
+	  <button ion-fab (click)="addToFavorites()">
+	    <ion-icon name="heart-outline"></ion-icon>
+	  </button>
+	</ion-fab>
+
+	<ion-fab bottom right *ngIf="favourite">
+	  <button ion-fab>
+	    <ion-icon name="heart"></ion-icon>
+	  </button>
+	</ion-fab>
 </ion-content>

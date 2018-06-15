@@ -4,6 +4,7 @@ import { Dish } from '../../shared/dish';
 import { DishProvider } from '../../providers/dish/dish';
 import { DishdetailPage } from '../dishdetail/dishdetail';
 
+import { FavouriteProvider } from '../../providers/favourite/favourite';
 /**
  * Generated class for the MenuPage page.
  *
@@ -24,6 +25,7 @@ export class MenuPage implements OnInit {
 	constructor(public navCtrl: NavController, 
 				public navParams: NavParams,
 				private dishservice: DishProvider,
+				private favouriteservice: FavouriteProvider,
 				@Inject('BaseURL') private BaseURL) { }
 
 	ngOnInit() {
@@ -41,6 +43,11 @@ export class MenuPage implements OnInit {
 		this.navCtrl.push(DishdetailPage, {
 			dish: dish
 		});
+	}
+
+	addToFavourites(dish: Dish) { 
+	    console.log('Adding to Favorites', dish.id);
+	    this.favouriteservice.addFavourite(dish.id);
 	}
 
 }
