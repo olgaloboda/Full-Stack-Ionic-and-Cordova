@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { Http, Response } from '@angular/http';
+import { Http } from '@angular/http';
 import { Leader } from '../../shared/leader';
 import { Observable } from 'rxjs/Observable';
 import { baseURL } from '../../shared/baseurl';
-import { ProcessHttpmsgProvider} from '../process-httpmsg/process-httpmsg';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -18,27 +17,24 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class LeaderProvider {
 
-  constructor(public http: Http,
-  				private processhttpmsgservice: ProcessHttpmsgProvider) {
+  res;
+  constructor(public http: Http) {
 
   }
 
   getLeaders(): Observable<Leader[]> {
   	return this.http.get(baseURL + 'leaders')
-                    .map(res => { return this.processhttpmsgservice.extractData(res); })
-                    .catch(error => { return this.processhttpmsgservice.handleError(error); });
+                    .map(res => res.json());
   }
 
   getLeader(id: number): Observable<Leader> {
  	return this.http.get(baseURL + 'leaders/' + id)
-  		.map (res => { return this.processhttpmsgservice.extractData(res)})
-  		.catch(error => {return this.processhttpmsgservice.handleError(error)});
+  		.map (res => res.json());
   }
 
   getFeaturedLeader(): Observable<Leader> {
   	return this.http.get(baseURL + 'leaders?featured=true')
-  		.map (res => { return this.processhttpmsgservice.extractData(res)[0];})
-  		.catch(error => {return this.processhttpmsgservice.handleError(error)});
+  		.map (res => res.json()[0]);
   }
 
 }
