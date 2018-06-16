@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams, ToastController, ActionSheetController } from 'ionic-angular';
 
 import { Dish } from '../../shared/dish';
 
 import { FavouriteProvider } from '../../providers/favourite/favourite';
+import { CommentPage } from '../../pages/comment/comment';
 
 /**
  * Generated class for the DishdetailPage page.
@@ -29,6 +30,8 @@ export class DishdetailPage {
 				public navParams: NavParams,
 				@Inject ('BaseURL') private BaseURL,
 				private toastCtrl: ToastController,
+				private actionSheetCtrl: ActionSheetController,
+				private modalCtrl: ModalController,
 				private favouriteservice: FavouriteProvider) {
 
 		this.dish = navParams.get('dish');
@@ -53,6 +56,44 @@ export class DishdetailPage {
 			position: 'middle',
 			duration: 3000
 		}).present();
+	}
+
+	openComment() {
+	    let modal = this.modalCtrl.create(CommentPage);
+	    modal.onDidDismiss(data => {
+	    	console.log(data);
+	    	const date: Date = new Date();
+    		this.dish.comments.push({
+				rating: data.rating,
+				author: data.name,
+				comment: data.comment,
+				date: date.toISOString()
+			});
+		});
+	    modal.present();
+	}
+
+	actionSheet() {
+		let actionSheet = this.actionSheetCtrl.create({
+			title: "Options",
+			buttons: [
+				{
+					text: 'Add to Favourites',
+					handler: () => {
+						this.addToFavorites();
+					}
+				}, {
+					text: 'Add a Comment',
+					handler: () => {
+						this.openComment();
+					}
+				}, {
+					text: 'Cancel',
+					role: 'cancel'
+				}
+			]
+		});
+		actionSheet.present();
 	}
 
 }
