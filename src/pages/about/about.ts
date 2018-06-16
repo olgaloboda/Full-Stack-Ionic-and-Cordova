@@ -23,7 +23,7 @@ export class AboutPage implements OnInit {
 	constructor(public navCtrl: NavController, 
 		public navParams: NavParams,
 		private leaderservice: LeaderProvider,
-		@Inject ('BaseURL') private BaseURL) {
+		@Inject ('BaseURL') public BaseURL) {
 	}
 
 	ionViewDidLoad() {

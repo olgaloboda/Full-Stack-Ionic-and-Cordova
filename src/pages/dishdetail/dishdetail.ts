@@ -28,7 +28,7 @@ export class DishdetailPage {
 
 	constructor(public navCtrl: NavController, 
 				public navParams: NavParams,
-				@Inject ('BaseURL') private BaseURL,
+				@Inject ('BaseURL') public BaseURL,
 				private toastCtrl: ToastController,
 				private actionSheetCtrl: ActionSheetController,
 				private modalCtrl: ModalController,

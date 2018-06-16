@@ -7,7 +7,6 @@ import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
 import { MenuPage } from '../pages/menu/menu';
 import { ContactPage } from '../pages/contact/contact';
-import { DishdetailPage } from '../pages/dishdetail/dishdetail';
 import { FavouritesPage } from '../pages/favourites/favourites';
 import { ReservationPage } from '../pages/reservation/reservation';
 import { LoginPage } from '../pages/login/login';
