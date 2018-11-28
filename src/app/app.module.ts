@@ -14,13 +14,20 @@ import { FavouritesPage } from '../pages/favourites/favourites';
 import { ReservationPage } from '../pages/reservation/reservation';
 import { CommentPage } from '../pages/comment/comment';
 import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 import { DishProvider } from '../providers/dish/dish';
 import { LeaderProvider } from '../providers/leader/leader';
 import { PromotionProvider } from '../providers/promotion/promotion';
 import { ProcessHttpmsgProvider } from '../providers/process-httpmsg/process-httpmsg';
+import { EmailComposer } from '@ionic-native/email-composer';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Camera } from '@ionic-native/camera';
+import { Network } from '@ionic-native/network';
+import { CallNumber } from '@ionic-native/call-number';
 
 import { baseURL } from '../shared/baseurl';
 import { FavouriteProvider } from '../providers/favourite/favourite';
@@ -36,7 +43,8 @@ import { FavouriteProvider } from '../providers/favourite/favourite';
     FavouritesPage,
     ReservationPage,
     CommentPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -55,18 +63,25 @@ import { FavouriteProvider } from '../providers/favourite/favourite';
     FavouritesPage,
     ReservationPage,
     CommentPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    LocalNotifications,
     DishProvider,
     LeaderProvider,
     PromotionProvider,
     ProcessHttpmsgProvider,
+    EmailComposer,
+    SocialSharing,
+    Camera,
     { provide: 'BaseURL', useValue: baseURL },
-    FavouriteProvider
+    FavouriteProvider,
+    Network,
+    CallNumber
   ]
 })
 export class AppModule {}

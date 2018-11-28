@@ -19,46 +19,50 @@
 
 
 <ion-content>
-	<ion-card *ngIf="dish">
-		<ion-card>
-		    <img src="{{BaseURL + dish.image}}"/>
-		    <ion-card-content>
-			    <ion-card-title>{{ dish.name }}</ion-card-title>
-			    <p>{{ dish.description }}</p>
-			</ion-card-content>
-	  	</ion-card>
-	  	<ion-row>
-	  		<ion-col>
-	  			<button ion-button icon-left clear small>
-		  			<ion-icon name="star"></ion-icon>
-		  			<div>{{ avgstars }} stars</div>
-		  		</button>
-		  	</ion-col>
-	  		<ion-col>
-	  			<button ion-button icon-left clear small>
-	  				<ion-icon name="text"></ion-icon>
-	  				<div>{{ numcomments }} comments</div>
-	  			</button>
-	  		</ion-col>
-	  	</ion-row>
-	</ion-card>
+	<ion-row align-item-center>
+		<ion-col col-12 col-lg-6>
+			<ion-card *ngIf="dish">
+				<ion-card>
+				    <img src="{{BaseURL + dish.image}}"/>
+				    <ion-card-content>
+					    <ion-card-title>{{ dish.name }}</ion-card-title>
+					    <p>{{ dish.description }}</p>
+					</ion-card-content>
+			  	</ion-card>
+			  	<ion-row>
+			  		<ion-col>
+			  			<button ion-button icon-left clear small>
+				  			<ion-icon name="star"></ion-icon>
+				  			<div>{{ avgstars }} stars</div>
+				  		</button>
+				  	</ion-col>
+			  		<ion-col>
+			  			<button ion-button icon-left clear small>
+			  				<ion-icon name="text"></ion-icon>
+			  				<div>{{ numcomments }} comments</div>
+			  			</button>
+			  		</ion-col>
+			  	</ion-row>
+			</ion-card>
+		</ion-col>
+		<ion-col col-12 col-lg-6>
+			<div [hidden]="dish">
+			    <ion-spinner></ion-spinner>
+			    <h4>Loading... Please Wait</h4>
+		  	</div>
 
-	<div [hidden]="dish">
-	    <ion-spinner></ion-spinner>
-	    <h4>Loading... Please Wait</h4>
-  	</div>
-
-  	<ion-list *ngIf="dish">
-  		<ion-list-header>Comments</ion-list-header>
-  		<ion-item *ngFor="let comment of dish.comments" text-wrap>
-  			<h4>{{ comment.comment }}</h4>
-  			<p>{{ comment.rating }} stars</p>
-  			<p>
-  				<span> -- {{ comment.author }} {{ comment.date | date}}</span>
-  			</p>
-  		</ion-item>
-  	</ion-list>
-
+		  	<ion-list *ngIf="dish">
+		  		<ion-list-header>Comments</ion-list-header>
+		  		<ion-item *ngFor="let comment of dish.comments" text-wrap>
+		  			<h4>{{ comment.comment }}</h4>
+		  			<p>{{ comment.rating }} stars</p>
+		  			<p>
+		  				<span> -- {{ comment.author }} {{ comment.date | date}}</span>
+		  			</p>
+		  		</ion-item>
+  			</ion-list>
+  		</ion-col>
+  </ion-row>
   	<ion-fab bottom right [hidden]="favourite">
 	  <button ion-fab (click)="addToFavorites()">
 	    <ion-icon name="heart-outline"></ion-icon>
